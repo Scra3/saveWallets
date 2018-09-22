@@ -1,0 +1,23 @@
+<%= tag :div, data: { cryptoNames: @crypto_names } %>
+
+<div class="grid-container">
+  <div id="qrcode" class="qrcode">
+    <div class="qrcode--stetup-message">
+      Enter your wallets and then generate the qrcode.
+    </div>
+  </div>
+
+  <div class="qrcode--generate">
+    <button onClick="generateQrCode()" class="qrcode--generate--button" type="button">
+      Generate QR Code
+    </button>
+  </div>
+
+  <div class="qrcode--wallet--list"></div>
+
+  <div class="qrcode--wallet--list--add-wallet">
+    <button onClick="renderNewWallet()" class="qrcode--wallet--list--add-wallet--button" type="button">
+      +
+    </button>
+  </div>
+</div>
