@@ -1,4 +1,4 @@
-<%= link_to raw("<i class='fa fa-arrow-left'></i>"), qrcode_index_path, class: 'qrcode--back--button', method: :get, disabled: true %>
+<%= link_to raw("<i class='fa fa-arrow-left'></i>"), qrcodes_path, class: 'qrcode--back--button', method: :get %>
 
 <div class="grid-container--new">
   <div id="qrcode" class="qrcode">
@@ -8,7 +8,7 @@
   </div>
 
   <div class="qrcode--generate">
-    <button onClick="generateQrCode()" class="qrcode--generate--button" type="button">
+    <button onClick="saveWallets()" class="qrcode--generate--button" type="button">
       Generate QR Code
     </button>
   </div>
@@ -21,4 +21,5 @@
     </button>
   </div>
 </div>
+
 <%= tag :div, data: { cryptoNames: @crypto_names } %>

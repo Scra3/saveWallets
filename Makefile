@@ -16,6 +16,18 @@ stop-app: ## Stop app
 create-db: ## Create db in docker postgres
 	docker-compose run web rake db:create
 
+.PHONY: migrate-db
+migrate-db: ## Migrate db in docker postgres
+	docker-compose run web rake db:migrate
+
+.PHONY: rollback-db
+rollback-db: ## Rollback db in docker postgres
+	docker-compose run web rake db:rollback
+
+.PHONY: rails-console
+rails-console: ## Rails console
+	docker-compose exec web rails console
+
 .PHONY: help
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
