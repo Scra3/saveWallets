@@ -1,5 +1,8 @@
 class QrcodeController < ApplicationController
-  def create
+  def index
+  end
+  def new
     @crypto_names = %w[EOS NEO]
   end
+
 end

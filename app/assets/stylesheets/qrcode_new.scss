@@ -1,0 +1,122 @@
+@import 'mixins';
+@import 'vars';
+@import 'buttons';
+
+.qrcode--back--button {
+  @include btn--secondary;
+  font-size: 2em;
+  width: 10em;
+  text-align: center;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.grid-container--new {
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+}
+
+.grid-container--new > div {
+  background-color: $background-color;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.qrcode {
+  padding-top: 1em;
+  height: 19em;
+  text-align: center;
+}
+
+.qrcode > img {
+  margin-left: auto;
+  margin-right: auto;
+  animation-name: qrcode;
+  animation-duration: 0.8s;
+}
+@keyframes qrcode {
+  0% {
+    transform: scale(0);
+  }
+
+  75% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.qrcode--stetup-message {
+  margin-top: 30%;
+}
+
+.qrcode--token {
+  animation-delay: 0.8s;
+  animation-duration: 0.8s;
+  animation-name: render-token;
+  opacity: 0;
+  font-size: 1.2em;
+  animation-fill-mode: forwards;
+}
+@keyframes render-token {
+  100% {
+    opacity: 1;
+  }
+}
+
+.qrcode--token--value {
+  font-weight: bold;
+}
+
+.qrcode--generate {
+  text-align: center;
+}
+
+.qrcode--generate--button {
+  @include btn--success;
+  font-size: 1.2em;
+  margin: 1em;
+}
+
+.qrcode--wallet--list {
+  display: grid;
+  grid-template-columns: auto;
+  grid-row-gap: 1em;
+}
+
+.qrcode--wallet--list--element {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 1em 4em;
+}
+
+.qrcode--wallet--list--element--name {}
+
+.qrcode--wallet--list--element--public-address {}
+
+.qrcode--wallet--list--element--public-address > input {
+  width: 28em;
+}
+
+.qrcode--wallet--list--element--button-remove {
+  @include btn--danger;
+  font-size: 1.2em;
+  height: 1.5em;
+}
+
+.qrcode--wallet--list--add-wallet {
+  padding-bottom: 1em;
+  padding-top: 1em;
+  text-align: start;
+}
+
+.qrcode--wallet--list--add-wallet--button {
+  @include btn--primary;
+  border-radius: 50%;
+  font-size: 1.8em;
+  height: 1.8em;
+  width: 1.8em;
+}

@@ -1,0 +1,14 @@
+@import 'mixins';
+@import 'vars';
+@mixin btn--danger {
+  @include btn(white, $btn-color-danger, transparent);
+}
+@mixin btn--primary {
+  @include btn(white, $btn-color-primary, transparent);
+}
+@mixin btn--success {
+  @include btn(white, $btn-color-success, transparent);
+}
+@mixin btn--secondary {
+  @include btn(white, $btn-color-secondary, transparent);
+}

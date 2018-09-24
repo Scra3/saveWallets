@@ -1,6 +1,6 @@
-<%= tag :div, data: { cryptoNames: @crypto_names } %>
+<%= link_to raw("<i class='fa fa-arrow-left'></i>"), qrcode_index_path, class: 'qrcode--back--button', method: :get, disabled: true %>
 
-<div class="grid-container">
+<div class="grid-container--new">
   <div id="qrcode" class="qrcode">
     <div class="qrcode--stetup-message">
       Enter your wallets and then generate the qrcode.
@@ -21,3 +21,4 @@
     </button>
   </div>
 </div>
+<%= tag :div, data: { cryptoNames: @crypto_names } %>

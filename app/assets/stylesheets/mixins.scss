@@ -1,7 +1,9 @@
+@import 'vars';
 @mixin btn($color, $background, $border) {
   color: $color;
   background-color: $background;
   border-color: $border;
+  box-shadow: $box-shadow;
   cursor: pointer;
 
   &.focus,

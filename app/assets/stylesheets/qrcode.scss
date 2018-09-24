@@ -1,123 +1,46 @@
 @import 'mixins';
+@import 'vars';
+@import 'buttons';
 
-body {}
+body,
+html {
+  height: 98%;
+}
 
 input[type=text] {
   box-sizing: border-box;
-  border: 2px solid #17a2b8;
+  border: 2px solid $btn-color-primary;
   background-color: white;
   height: 2.5em;
 }
 
 .grid-container {
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: auto auto;
   justify-content: center;
+  grid-gap: 10em;
+  align-items: center;
+  height: 80%;
 }
 
 .grid-container > div {
-  background-color: #e9ebee;
-  padding-left: 1em;
-  padding-right: 1em;
+  background-color: $background-color;
+  box-shadow: $box-shadow;
 }
 
-.qrcode {
-  padding-top: 1em;
-  height: 19em;
-  text-align: center;
+.qrcode--new--button {
+  @include btn--primary;
+  margin-top: 43%;
+  font-size: 2em;
+  height: 8em;
+  width: 8em;
 }
 
-.qrcode > img {
-  margin-left: auto;
-  margin-right: auto;
-  animation-name: qrcode;
-  animation-duration: 0.8s;
-}
-@keyframes qrcode {
-  0% {
-    transform: scale(0);
-  }
-
-  75% {
-    transform: scale(1.2);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-.qrcode--stetup-message {
-  margin-top: 30%;
-}
-
-.qrcode--token {
-  animation-delay: 0.8s;
-  animation-duration: 0.8s;
-  animation-name: render-token;
-  opacity: 0;
-  font-size: 1.2em;
-  animation-fill-mode: forwards;
-}
-@keyframes render-token {
-  100% {
-    opacity: 1;
-  }
-}
-
-.qrcode--token--value {
-  font-weight: bold;
-}
-
-.qrcode--generate {
-  text-align: center;
-}
-
-.qrcode--generate--button {
-  @include btn(white, #28a745, transparent);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  font-size: 1.2em;
-  margin: 1em;
-}
-
-.qrcode--wallet--list {
-  display: grid;
-  grid-template-columns: auto;
-  grid-row-gap: 1em;
-}
-
-.qrcode--wallet--list--element {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-gap: 1em 4em;
-}
-
-.qrcode--wallet--list--element--name {}
-
-.qrcode--wallet--list--element--public-address {}
-
-.qrcode--wallet--list--element--public-address > input {
-  width: 28em;
-}
-
-.qrcode--wallet--list--element--button-remove {
-  @include btn(white, #d9534f, transparent);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  font-size: 1.2em;
-  height: 1.5em;
-}
-
-.qrcode--wallet--list--add-wallet {
-  padding-bottom: 1em;
-  padding-top: 1em;
-  text-align: start;
-}
-
-.qrcode--wallet--list--add-wallet--button {
-  @include btn(white, #17a2b8, transparent);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 50%;
-  font-size: 1.8em;
-  height: 1.8em;
-  width: 1.8em;
+.qrcode--load--button {
+  @include btn--success;
+  margin-top: 43%;
+  font-size: 2em;
+  height: 8em;
+  width: 8em;
+  word-wrap: break-word;
 }

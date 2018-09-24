@@ -2,7 +2,7 @@
 const QRCODE_URL = "http://localhost"
 
 document.addEventListener("DOMContentLoaded", function(event) {
-  renderNewWallet();
+  document.querySelector(".qrcode--wallet--list") && renderNewWallet();
 });
 
 function renderNewWallet() {
@@ -35,7 +35,7 @@ function renderPublicAddressInput() {
 }
 
 function renderRemoveWalletButton() {
-  return "<button onClick='removeWallet(this)' class='qrcode--wallet--list--element--button-remove' type='button'>\
+  return "<button onClick='removeWallet(this)' class='btn--danger qrcode--wallet--list--element--button-remove' type='button'>\
             <i class='fa fa-trash'></i>\
           </button>";
 }
