@@ -43,7 +43,7 @@ function generateQrCode(token) {
   new QRCode(qrcodeElement, `${QRCODE_URL}?token=${token}`);
 }
 
-function renderToken(tokenGeneratedValue) {
+function renderToken(tokenValueGenerated) {
   let qrcodeElement = document.getElementsByClassName("qrcode")[0];
   let qrcodeTokenGenerateElement = document.getElementsByClassName("qrcode--token")[0];
 
@@ -53,16 +53,35 @@ function renderToken(tokenGeneratedValue) {
 
   let token = document.createElement("div");
   let tokenMessage = document.createElement("div");
-  let tokenValue = document.createElement("input");
+  let tokenRender = document.createElement("div");
+  let tokenRenderValue = document.createElement("input");
+  let tokenRenderCopyButton = document.createElement("div");
 
-  tokenValue.classList.add("qrcode--token--value");
   token.classList.add("qrcode--token");
+  tokenRender.classList.add("qrcode--token--render");
+  tokenRenderValue.classList.add("qrcode--token--render--value");
+  tokenRenderCopyButton.classList.add("qrcode--token--render--copy--button");
 
-  token.appendChild(tokenMessage);
-  token.appendChild(tokenValue);
   tokenMessage.innerHTML = "Copy this token to save your qrcode.";
-  tokenValue.value = tokenGeneratedValue;
+  token.appendChild(tokenMessage);
+
+  tokenRenderValue.value = tokenValueGenerated;
+  tokenRenderValue.readOnly = true;
+  tokenRender.appendChild(tokenRenderValue);
+
+  tokenRenderCopyButton.innerHTML = "<i class='fa fa-copy'></i>";
+  tokenRenderCopyButton.onclick = function () { copyToken(); };
+  tokenRender.appendChild(tokenRenderCopyButton);
+
+  token.appendChild(tokenRender);
+
   qrcodeElement.appendChild(token);
+}
+
+function copyToken() {
+  var copyText = document.getElementsByClassName("qrcode--token--render--value")[0];
+  copyText.select();
+  document.execCommand("copy");
 }
 
 function removeWallet(removeButtonElement) {
@@ -86,7 +105,7 @@ function saveWallets() {
         window.location = url_location;
       });
     } else {
-      
+
     }
   })
   .catch(function (error) {

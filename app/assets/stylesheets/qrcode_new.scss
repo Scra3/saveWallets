@@ -54,6 +54,7 @@
 }
 
 .qrcode--token {
+  justify-content: center;
   animation-delay: 0.8s;
   animation-duration: 0.8s;
   animation-name: render-token;
@@ -67,8 +68,21 @@
   }
 }
 
-.qrcode--token--value {
+.qrcode--token--render {
+  display: grid;
+  grid-template-columns: 10em auto;
+  justify-content: center;
+}
+
+.qrcode--token--render--value {
   font-weight: bold;
+}
+
+.qrcode--token--render--copy--button {
+  @include btn--secondary;
+  font-size: 1.2em;
+  height: 1.2em;
+  width: 1.3em;
 }
 
 .qrcode--generate {

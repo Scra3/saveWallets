@@ -3,12 +3,12 @@ class QrcodesController < ApplicationController
   end
 
   def new
-    @crypto_names = %w[EOS NEO BTC]
+    @crypto_names = %w[EOS NEO BTC].sort
   end
 
   def create
     new_wallet = Wallet.new
-    wallet_params[:wallets].map do |wallet|
+    wallets_params[:wallets].map do |wallet|
       new_wallet.addresses << Address.new(wallet)
     end
 
@@ -19,7 +19,7 @@ class QrcodesController < ApplicationController
 
   private
 
-  def wallet_params
+  def wallets_params
     params.require(:qrcode).permit(wallets: [:crypto_name, :token])
   end
 end
