@@ -16,7 +16,6 @@ class QrcodesController < ApplicationController
     end
 
     new_wallet.save! || render(status: 422)
-
     render json: { 'token': new_wallet.token }, status: 200
   end
 
