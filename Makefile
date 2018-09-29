@@ -2,7 +2,7 @@
 
 .PHONY: run-app
 run-app: ## Run app with docker
-	docker-compose up -d
+	docker-compose up
 
 .PHONY: re-build
 re-build: ## Rebuild app and run app
@@ -27,6 +27,10 @@ rollback-db: ## Rollback db in docker postgres
 .PHONY: rails-console
 rails-console: ## Rails console
 	docker-compose exec web rails console
+
+.PHONY: run-rubocop
+run-rubocop: ## Run rubocop linter
+	docker-compose exec web bundle exec rubocop
 
 .PHONY: help
 help:

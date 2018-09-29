@@ -8,8 +8,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function renderNewWallet() {
   let walletListElement = document.createElement("div");
   walletListElement.classList.add("qrcode--wallet--list--element");
-  walletListElement.innerHTML =
-    `${renderCryptoNamesDropdown()}${renderPublicAddressInput()}${renderRemoveWalletButton()}`;
+  walletListElement.innerHTML = `${renderCryptoNamesDropdown()}${renderPublicAddressInput()}${renderRemoveWalletButton()}`;
 
   let walletList = document.getElementsByClassName("qrcode--wallet--list")[0];
   walletList.appendChild(walletListElement);
