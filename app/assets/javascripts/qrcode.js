@@ -116,10 +116,7 @@ function loadWallets() {
     let walletList = document.getElementsByClassName("qrcode--wallet--list")[0];
     walletList.innerHTML = "";
 
-    let wallets = data.wallets;
-    for (let i = 0; i < wallets.length; i++) {
-      renderNewWallet(wallets[i].crypto_name, wallets[i].token);
-    }
+    data.wallets.forEach(wallet => renderNewWallet(wallet.crypto_name, wallet.token));
   });
 }
 
@@ -133,12 +130,11 @@ function saveWallets() {
 function buildJsonWallets() {
   let walletListElements = document.getElementsByClassName("qrcode--wallet--list--element");
 
-  let wallets = [];
-  for (let i = 0; i < walletListElements.length; i++) {
-    let cryptoName = walletListElements[i].firstChild.firstChild.value;
-    let publicAddress = walletListElements[i].childNodes[1].firstChild.value;
-    wallets[i] = { crypto_name: cryptoName, token: publicAddress };
-  }
+  let wallets = walletListElements.map(wallet => {
+    let cryptoName = wallet.firstChild.firstChild.value;
+    let publicAddress = wallet.childNodes[1].firstChild.value;
+    return { crypto_name: cryptoName, token: publicAddress };
+  });
 
   let json = { qrcode: { wallets: wallets } };
   return JSON.stringify(json);

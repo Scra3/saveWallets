@@ -11,13 +11,13 @@
   padding-right: 0.5em;
 }
 
-.grid-container--new {
+.grid-container {
   display: grid;
   grid-template-columns: auto;
   justify-content: center;
 }
 
-.grid-container--new > div {
+.grid-container > div {
   background-color: $background-color;
   padding-left: 1em;
   padding-right: 1em;
