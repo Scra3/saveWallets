@@ -2,11 +2,8 @@ require 'net/http'
 require 'json'
 
 class QrcodesController < ApplicationController
-  def index
-  end
-
   def new
-    @crypto_names = %w[ETH].sort
+    @crypto_names = %w[ETH BTC].sort
   end
 
   def create
@@ -17,6 +14,11 @@ class QrcodesController < ApplicationController
 
     new_wallet.save! || render(status: 422)
     render json: { 'token': new_wallet.token }, status: 200
+  end
+
+  def show
+    addresses = Wallet.find_by(token: params[:id]).addresses.map(&:as_json)
+    render json: { 'wallets': addresses }, status: 200
   end
 
   private

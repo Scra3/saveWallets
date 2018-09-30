@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-  resources :qrcodes, only: [:index,:new, :create]
-  root to: 'qrcodes#index'
+  root to: 'qrcodes#new'
+
+  resources :qrcodes, only: %i[new create show]
 end

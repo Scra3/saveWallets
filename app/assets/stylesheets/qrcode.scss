@@ -2,45 +2,158 @@
 @import 'vars';
 @import 'buttons';
 
-body,
-html {
-  height: 98%;
+.qrcode--back--button {
+  @include btn--secondary;
+  font-size: 2em;
+  width: 10em;
+  text-align: center;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
-input[type=text] {
+.grid-container--new {
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+}
+
+.grid-container--new > div {
+  background-color: $background-color;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.qrcode {
+  padding-top: 1em;
+  height: 19em;
+  text-align: center;
+}
+
+.qrcode > img {
+  margin-left: auto;
+  margin-right: auto;
+  animation-name: qrcode;
+  animation-duration: 0.8s;
+}
+@keyframes qrcode {
+  0% {
+    transform: scale(0);
+  }
+
+  75% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.qrcode--message {
+  margin-top: 30%;
+}
+
+.qrcode--token {
+  justify-content: center;
+  animation-delay: 0.8s;
+  animation-duration: 0.8s;
+  animation-name: render-token;
+  opacity: 0;
+  font-size: 1.2em;
+  animation-fill-mode: forwards;
+}
+@keyframes render-token {
+  100% {
+    opacity: 1;
+  }
+}
+
+.qrcode--token--render {
+  display: grid;
+  grid-template-columns: 10em auto;
+  justify-content: center;
+}
+
+.qrcode--token--render--value {
+  font-weight: bold;
+}
+
+.qrcode--token--render--copy--button {
+  @include btn--secondary;
+  font-size: 1.2em;
+  height: 1.2em;
+  width: 1.3em;
+}
+
+.qrcode--generate {
+  text-align: center;
+}
+
+.qrcode--generate--button {
+  @include btn--success;
+  font-size: 1.2em;
+  margin: 1em;
+}
+
+.qrcode--load {
+  display: grid;
+  grid-template-columns: 10em 1em;
+  padding-bottom: 1em;
+}
+
+.qrcode--load--token {}
+
+.qrcode--load--button {
+  @include btn--secondary;
+  font-size: 1.2em;
+  height: 1.5em;
+  width: 1.9em;
+  margin-left: -0.1em;
+}
+
+.qrcode--wallet--list {
+  display: grid;
+  grid-template-columns: auto;
+  grid-row-gap: 1em;
+}
+
+.qrcode--wallet--list--element {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 1em 4em;
+}
+
+.qrcode--wallet--list--element--name {}
+
+.qrcode--wallet--list--element--public-address {}
+
+.qrcode--wallet--list--element--public-address input[type=text] {
   box-sizing: border-box;
   border: 2px solid $btn-color-primary;
   background-color: white;
   height: 2.5em;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto;
-  justify-content: center;
-  grid-gap: 10em;
-  align-items: center;
-  height: 80%;
+.qrcode--wallet--list--element--public-address > input {
+  width: 28em;
 }
 
-.grid-container > div {
-  background-color: $background-color;
-  box-shadow: $box-shadow;
+.qrcode--wallet--list--element--button-remove {
+  @include btn--danger;
+  font-size: 1.2em;
+  height: 1.5em;
 }
 
-.qrcode--new--button {
+.qrcode--wallet--list--add-wallet {
+  padding-bottom: 1em;
+  padding-top: 1em;
+  text-align: start;
+}
+
+.qrcode--wallet--list--add-wallet--button {
   @include btn--primary;
-  margin-top: 43%;
-  font-size: 2em;
-  height: 8em;
-  width: 8em;
-}
-
-.qrcode--load--button {
-  @include btn--success;
-  margin-top: 43%;
-  font-size: 2em;
-  height: 8em;
-  width: 8em;
-  word-wrap: break-word;
+  border-radius: 50%;
+  font-size: 1.8em;
+  height: 1.8em;
+  width: 1.8em;
 }

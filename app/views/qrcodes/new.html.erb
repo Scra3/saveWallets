@@ -1,8 +1,6 @@
-<%= link_to raw("<i class='fa fa-arrow-left'></i>"), qrcodes_path, class: 'qrcode--back--button', method: :get %>
-
 <div class="grid-container--new">
   <div id="qrcode" class="qrcode">
-    <div class="qrcode--stetup-message">
+    <div class="qrcode--message">
       Enter your wallets and then generate the qrcode.
     </div>
   </div>
@@ -10,6 +8,13 @@
   <div class="qrcode--generate">
     <button onClick="saveWallets()" class="qrcode--generate--button" type="button">
       Generate QR Code
+    </button>
+  </div>
+
+  <div class="qrcode--load">
+    <input  class="qrcode--load--token" type="text" placeholder="your token"/>
+    <button onClick="loadWallets()" class="qrcode--load--button" type="button">
+      <i class="fa fa-download"></i>
     </button>
   </div>
 

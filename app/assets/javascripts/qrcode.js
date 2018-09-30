@@ -5,32 +5,52 @@ document.addEventListener("DOMContentLoaded", function(event) {
   document.querySelector(".qrcode--wallet--list") && renderNewWallet();
 });
 
-function renderNewWallet() {
+function renderNewWallet(selectedName = '', publicAddress = '') {
   let walletListElement = document.createElement("div");
   walletListElement.classList.add("qrcode--wallet--list--element");
-  walletListElement.innerHTML = `${renderCryptoNamesDropdown()}${renderPublicAddressInput()}${renderRemoveWalletButton()}`;
+
+  walletListElement.appendChild(renderCryptoNamesDropdown(selectedName));
+  walletListElement.appendChild(renderPublicAddressInput(publicAddress));
+  walletListElement.appendChild(renderRemoveWalletButton());
 
   let walletList = document.getElementsByClassName("qrcode--wallet--list")[0];
   walletList.appendChild(walletListElement);
 }
 
-function renderCryptoNamesDropdown() {
-  return `<div class='qrcode--wallet--list--element--name'>${renderCryptoNames()}</div>`;
+function renderCryptoNamesDropdown(selectedName) {
+  let cryptoNames = document.createElement("div");
+  cryptoNames.classList.add("qrcode--wallet--list--element--name");
+  cryptoNames.innerHTML = renderCryptoNames(selectedName);
+  return cryptoNames;
 }
 
-function renderCryptoNames() {
+function renderCryptoNames(selectedName) {
   let cryptoNames = JSON.parse(document.querySelector("div[data-cryptonames]")
                                        .getAttribute('data-cryptonames'));
-  const options = cryptoNames.map(cryptoName => `<option value=${cryptoName}>${cryptoName}</option>`).join('');
+  const options = cryptoNames.map(cryptoName => {
+    if(selectedName == cryptoName) {
+      return `<option selected value=${cryptoName}>${cryptoName}</option>`
+    } else {
+      return `<option value=${cryptoName}>${cryptoName}</option>`
+    }
+  }).join('');
   return `<select>${options}</select>`;
 }
 
-function renderPublicAddressInput() {
-  return "<div class='qrcode--wallet--list--element--public-address'><input type='text' placeholder='public address' name='wallet-name'></div>";
+function renderPublicAddressInput(publicAddress) {
+  let addressInput = document.createElement("div");
+  addressInput.classList.add("qrcode--wallet--list--element--public-address");
+  addressInput.innerHTML = `<input type='text' value='${publicAddress}' placeholder='public address' name='wallet-name'>`;
+  return addressInput;
 }
 
 function renderRemoveWalletButton() {
-  return "<button onClick='removeWallet(this)' class='btn--danger qrcode--wallet--list--element--button-remove' type='button'><i class='fa fa-trash'></i></button>";
+  let removeButton = document.createElement("button");
+  removeButton.onclick = function () { removeWallet(this); };
+  removeButton.classList.add("btn--danger");
+  removeButton.classList.add("qrcode--wallet--list--element--button-remove");
+  removeButton.innerHTML = "<i class='fa fa-trash'></i>";
+  return removeButton;
 }
 
 function generateQrCode(token) {
@@ -78,7 +98,7 @@ function renderToken(tokenValueGenerated) {
 }
 
 function copyToken() {
-  var copyText = document.getElementsByClassName("qrcode--token--render--value")[0];
+  let copyText = document.getElementsByClassName("qrcode--token--render--value")[0];
   copyText.select();
   document.execCommand("copy");
 }
@@ -90,42 +110,27 @@ function removeWallet(removeButtonElement) {
   }
 }
 
-function saveWallets() {
-  const url = "/qrcodes";
-  const url_location = "/qrcodes/new";
-  const method = "POST";
+function loadWallets() {
+  let token = document.getElementsByClassName("qrcode--load--token")[0];
+  fetchApi(`/qrcodes/${token.value}`, "GET", null, function(data) {
+    let walletList = document.getElementsByClassName("qrcode--wallet--list")[0];
+    walletList.innerHTML = "";
 
-  fetch(buildRequest(url, method)).then(function (response) {
-    if (response.ok) {
-      response.json().then(function(data) {
-        generateQrCode(data.token);
-        renderToken(data.token);
-      }, function () {
-        window.location = url_location;
-      });
-    } else {
-
+    let wallets = data.wallets;
+    for (let i = 0; i < wallets.length; i++) {
+      renderNewWallet(wallets[i].crypto_name, wallets[i].token);
     }
-  })
-  .catch(function (error) {
-    console.log(error);
   });
 }
 
-function buildRequest(url, method) {
-  return new Request(url, {
-    method: method,
-    body: buildRequestBody(),
-    credentials: 'same-origin',
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
-      'Accept': 'application/json'
-    })
+function saveWallets() {
+  fetchApi("/qrcodes", "POST", buildJsonWallets(), function(data) {
+    generateQrCode(data.token);
+    renderToken(data.token);
   });
 }
 
-function buildRequestBody() {
+function buildJsonWallets() {
   let walletListElements = document.getElementsByClassName("qrcode--wallet--list--element");
 
   let wallets = [];
@@ -135,11 +140,6 @@ function buildRequestBody() {
     wallets[i] = { crypto_name: cryptoName, token: publicAddress };
   }
 
-  let json = {
-    qrcode: {
-      wallets: wallets
-    }
-  };
-
+  let json = { qrcode: { wallets: wallets } };
   return JSON.stringify(json);
 }

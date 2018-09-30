@@ -35,8 +35,12 @@ gem 'jbuilder', '~> 2.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+# Css icons
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.4'
+# Ruby linter
 gem 'rubocop', '~> 0.59.2', require: false
+# Load config/application.yml
+gem 'figaro', '~> 1.1', '>= 1.1.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
