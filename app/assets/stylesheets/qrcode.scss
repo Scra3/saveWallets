@@ -2,25 +2,16 @@
 @import 'vars';
 @import 'buttons';
 
-.qrcode--back--button {
-  @include btn--secondary;
-  font-size: 2em;
-  width: 10em;
-  text-align: center;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+body,
+html {
+  height: 100%;
+  background-color: #f1f1f1;
 }
 
 .grid-container {
   display: grid;
   grid-template-columns: auto;
   justify-content: center;
-}
-
-.grid-container > div {
-  background-color: $background-color;
-  padding-left: 1em;
-  padding-right: 1em;
 }
 
 .qrcode {
@@ -83,6 +74,7 @@
   font-size: 1.2em;
   height: 1.2em;
   width: 1.3em;
+  margin-left: -0.2em;
 }
 
 .qrcode--generate {
@@ -108,7 +100,7 @@
   font-size: 1.2em;
   height: 1.5em;
   width: 1.9em;
-  margin-left: -0.1em;
+  margin-left: -0.2em;
 }
 
 .qrcode--wallet--list {
@@ -127,14 +119,11 @@
 
 .qrcode--wallet--list--element--public-address {}
 
-.qrcode--wallet--list--element--public-address input[type=text] {
+.qrcode--wallet--list--element--public-address > input[type=text] {
   box-sizing: border-box;
   border: 2px solid $btn-color-primary;
   background-color: white;
   height: 2.5em;
-}
-
-.qrcode--wallet--list--element--public-address > input {
   width: 28em;
 }
 

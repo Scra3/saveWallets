@@ -78,16 +78,16 @@ function renderToken(tokenValueGenerated) {
 
   token.classList.add("qrcode--token");
   tokenRender.classList.add("qrcode--token--render");
-  tokenRenderValue.classList.add("qrcode--token--render--value");
-  tokenRenderCopyButton.classList.add("qrcode--token--render--copy--button");
 
   tokenMessage.innerHTML = "Copy this token to save your qrcode.";
   token.appendChild(tokenMessage);
 
+  tokenRenderValue.classList.add("qrcode--token--render--value");
   tokenRenderValue.value = tokenValueGenerated;
   tokenRenderValue.readOnly = true;
   tokenRender.appendChild(tokenRenderValue);
 
+  tokenRenderCopyButton.classList.add("qrcode--token--render--copy--button");
   tokenRenderCopyButton.innerHTML = "<i class='fa fa-copy'></i>";
   tokenRenderCopyButton.onclick = function () { copyToken(); };
   tokenRender.appendChild(tokenRenderCopyButton);
@@ -130,11 +130,12 @@ function saveWallets() {
 function buildJsonWallets() {
   let walletListElements = document.getElementsByClassName("qrcode--wallet--list--element");
 
-  let wallets = walletListElements.map(wallet => {
-    let cryptoName = wallet.firstChild.firstChild.value;
-    let publicAddress = wallet.childNodes[1].firstChild.value;
-    return { crypto_name: cryptoName, token: publicAddress };
-  });
+  let wallets = [];
+  for (let i = 0; i < walletListElements.length; i++) {
+    let cryptoName = walletListElements[i].firstChild.firstChild.value;
+    let publicAddress = walletListElements[i].childNodes[1].firstChild.value;
+    wallets[i] = { crypto_name: cryptoName, token: publicAddress };
+  }
 
   let json = { qrcode: { wallets: wallets } };
   return JSON.stringify(json);
